@@ -1,30 +1,67 @@
-// const crearPibe = async () => {
-//   try {
-//     const newUser = await User.create({
-//       firstName: "Pepito",
-//       secondName: null,
-//       lastName: "Lopez",
-//       birthday: new Date().toLocaleDateString("en-EN"),
-//       phone: "092028448",
-//       gender: "M",
-//       role: "admin",
-//     });
+const { User } = require("../models");
 
-//     console.log("Se guardo el pibe");
-//   } catch (error) {
-//     console.error("ERROR: ", error);
-//   }
-// };
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      offset: Number(req.query.since) || 0,
+      limit: Number(req.query.limit) || 10,
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(503).send(error);
+  }
+};
 
-const getUsers = (req, res) => {};
+const getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(503).send(error.message);
+  }
+};
 
-const getUser = (req, res) => {};
+const createUser = async (req, res) => {
+  try {
+    const newUser = await User.create({
+      firstName: req.body.firstName,
+      secondName: req.body.secondName || null,
+      lastName: req.body.lastName,
+      birthday: req.body.birthday,
+      phone: req.body.phone,
+      gender: req.body.gender,
+      role: req.body.role,
+    });
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(503).send(error.message);
+  }
+};
 
-const createUser = (req, res) => {};
+const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { ...update } = req.body;
+    const updatedRows = await User.update(update, { where: { id } });
+    res.status(200).send(`Updated rows: ${updatedRows}`);
+  } catch (error) {
+    res.status(503).send(error.message);
+  }
+};
 
-const updateUser = (req, res) => {};
-
-const deleteUser = (req, res) => {};
+const deleteUser = async (req, res) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).send("Deleted");
+  } catch (error) {
+    res.status(503).send(error.message);
+  }
+};
 
 module.exports = {
   getUsers,

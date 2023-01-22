@@ -9,11 +9,13 @@ const { User } = require("./models/index");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+
 // Cors
 app.use(cors());
 
 // Routes (Dynamic routes)
-app.use("/api", require("./routes/index"));
+app.use("/api", require("./routes"));
 
 // Listen
 app.listen(PORT, () => {

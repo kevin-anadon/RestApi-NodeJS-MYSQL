@@ -20,11 +20,11 @@ const User = sequelize.define(
       type: DataTypes.STRING,
     },
     birthday: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       unique: true,
       allowNull: false,
     },
@@ -40,6 +40,7 @@ const User = sequelize.define(
   },
   {
     timestamps: true,
+    paranoid: true,
   }
 );
 

@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const success = require("console-success");
 
 const { dbConnect } = require("./config/mysql");
 const { User } = require("./models/index");
@@ -18,8 +17,10 @@ app.use(cors());
 app.use("/api", require("./routes"));
 
 // Listen
-app.listen(PORT, () => {
-  console.success(`Server started on port: ${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Server started on port: ${PORT}`);
 });
 
 dbConnect();
+
+module.exports = {app, server};

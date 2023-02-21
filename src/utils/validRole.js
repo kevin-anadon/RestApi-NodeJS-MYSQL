@@ -1,4 +1,4 @@
-const checkRole = (role) => {
+const validRole = (role) => {
   if ((role !== "admin" && role !== "user") & role) {
     throw new Error("Admin and User are the only valid roles");
   }
@@ -6,5 +6,5 @@ const checkRole = (role) => {
 };
 
 module.exports = {
-  checkRole,
+  validRole,
 };

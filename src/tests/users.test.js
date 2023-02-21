@@ -4,6 +4,8 @@ const { closeDbConnection, userIdFromPhone } = require("../utils/index");
 
 const api = supertest(app);
 
+// TODO: Update tests with jwt and auth endpoint
+
 test("users are returned as json", async () => {
   await api
     .get("/api/users")
@@ -24,6 +26,8 @@ test.skip("create one user", async () => {
       lastName: 'Test',
       birthday: '1994/07/15',
       phone: '095623448',
+      email: 'testing@pepemail.com',
+      password: '12345',
       gender: 'M',
       role: 'user',})
     .expect(201)

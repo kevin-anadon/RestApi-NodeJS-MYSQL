@@ -1,13 +1,21 @@
 const { checkPhone } = require("./checkPhone");
-const { checkRole } = require("./checkRole");
+const { validRole } = require("./validRole");
+const { hasRole } = require("./hasRole");
 const { userExistsId } = require("./userExistsId");
 const { closeDbConnection } = require("./closeDbConnection");
 const { userIdFromPhone } = require("./userIdFromPhone");
+const { emailExists } = require("./emailExists");
+const { encrypt } = require("./encrypt");
+const { generateJWT } = require("./generateJWT");
 
 module.exports = {
   checkPhone,
-  checkRole,
+  validRole,
+  hasRole,
   userExistsId,
   closeDbConnection,
-  userIdFromPhone
+  userIdFromPhone,
+  emailExists,
+  encrypt,
+  generateJWT
 };

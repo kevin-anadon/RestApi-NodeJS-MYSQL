@@ -1,11 +1,13 @@
-//TODO http://localhost/users GET, POST, PUT, DELETE
-const express = require("express");
+// url/api/users GET, POST, PUT, DELETE
+// TODO: validateJWT in delete and admin role
+
+const { Router } = require("express");
 const { check } = require("express-validator");
-const router = express.Router();
+const router = Router();
 
 //Validators
-const { validateFields } = require("../middlewares");
-const { checkRole, userExistsId, checkPhone } = require("../utils");
+const { validateFields, validateJWT } = require("../middlewares");
+const { validRole, hasRole, userExistsId, checkPhone, emailExists } = require("../utils");
 
 const {
   getUsers,
@@ -25,9 +27,12 @@ router.post(
     check("birthday", "birthday is required").not().isEmpty(),
     check("phone", "phone is required").not().isEmpty(),
     check("phone").custom(checkPhone),
+    check("email", "Email is required").isEmail(),
+    check("password", "Password is required").not().isEmpty(),
     check("gender", "gender is required").not().isEmpty(),
     check("role", "role is required").not().isEmpty(),
-    check("role").custom(checkRole),
+    check("email").custom(emailExists),
+    check("role").custom(validRole),
     validateFields,
   ],
   createUser
@@ -36,15 +41,21 @@ router.put(
   "/:id",
   [
     check("id").custom(userExistsId),
-    check("role").custom(checkRole),
+    check("email").custom(emailExists),
+    check("role").custom(validRole),
     check("phone").custom(checkPhone),
     validateFields,
   ],
   updateUser
 );
 router.delete(
-  "/:id",
-  [check("id").custom(userExistsId), validateFields],
+  "/:id",  
+  [
+    validateJWT,
+    hasRole('admin'),
+    check("id").custom(userExistsId), 
+    validateFields
+  ],
   deleteUser
 );
 

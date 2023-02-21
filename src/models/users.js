@@ -28,6 +28,16 @@ const User = sequelize.define(
       unique: true,
       allowNull: false,
     },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      unique: false,
+      allowNull: false,
+    },
     gender: {
       type: DataTypes.ENUM(["M", "W"]),
       allowNull: false,

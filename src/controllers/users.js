@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const { encrypt } = require("../utils");
 
 const getUsers = async (req, res) => {
   try {
@@ -30,6 +31,8 @@ const createUser = async (req, res) => {
       lastName: req.body.lastName,
       birthday: req.body.birthday,
       phone: req.body.phone,
+      email: req.body.email,
+      password: encrypt(req.body.password),
       gender: req.body.gender,
       role: req.body.role,
     });
@@ -42,7 +45,8 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { ...update } = req.body;
+    const { password, ...update } = req.body;
+    if (password) { update.password = encrypt(password) }
     const updatedRows = await User.update(update, { where: { id } });
     res.status(200).send(`Updated rows: ${updatedRows}`);
   } catch (error) {

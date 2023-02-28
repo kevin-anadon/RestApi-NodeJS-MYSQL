@@ -15,7 +15,6 @@ Additional params for GET (/users): limit (10 by default) and offset (0 by defau
 POST(/auth)
 
 Deployed in AWS (EC2) and RDS for the database
-(http://ec2-54-94-33-33.sa-east-1.compute.amazonaws.com:3001)
 
 -------------------------------------------------------
 Load testing done with JMeter (Important results):

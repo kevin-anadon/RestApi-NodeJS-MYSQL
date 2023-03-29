@@ -1,26 +1,26 @@
-const express = require("express");
-const dotenv = require("dotenv").config();
-const cors = require("cors");
+const express = require("express")
+const dotenv = require("dotenv").config()
+const cors = require("cors")
 
-const { dbConnect } = require("./config/mysql");
-const { User } = require("./models");
+const { dbConnect } = require("./config/mysql")
+const { User } = require("./models")
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = express()
+const PORT = process.env.PORT || 3000
 
-app.use(express.json());
+app.use(express.json())
 
 // Cors
-app.use(cors());
+app.use(cors())
 
 // Routes (Dynamic routes)
-app.use("/api", require("./routes"));
+app.use("/api", require("./routes"))
 
 // Listen
 const server = app.listen(PORT, () => {
-  console.log(`Server started on port: ${PORT}`);
-});
+  console.log(`Server started on port: ${PORT}`)
+})
 
-dbConnect();
+dbConnect()
 
-module.exports = {app, server};
+module.exports = { app, server }

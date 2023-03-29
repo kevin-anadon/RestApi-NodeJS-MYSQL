@@ -46,7 +46,9 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { password, ...update } = req.body;
-    if (password) { update.password = encrypt(password) }
+    if (password) {
+      update.password = encrypt(password);
+    }
     const updatedRows = await User.update(update, { where: { id } });
     res.status(200).send(`Updated rows: ${updatedRows}`);
   } catch (error) {

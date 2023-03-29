@@ -1,5 +1,5 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../config/mysql");
+const { DataTypes } = require("sequelize")
+const { sequelize } = require("../config/mysql")
 
 const User = sequelize.define(
   "users",
@@ -52,8 +52,8 @@ const User = sequelize.define(
     timestamps: true,
     paranoid: true,
   }
-);
+)
 
 module.exports = {
   User,
-};
+}

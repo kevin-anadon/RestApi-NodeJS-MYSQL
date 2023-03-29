@@ -1,9 +1,9 @@
-const { sequelize } = require("../config/mysql");
+const { sequelize } = require("../config/mysql")
 
-const closeDbConnection = () => { 
-    sequelize.close()
- }
+const closeDbConnection = () => {
+  sequelize.close()
+}
 
 module.exports = {
-    closeDbConnection
-};
+  closeDbConnection,
+}

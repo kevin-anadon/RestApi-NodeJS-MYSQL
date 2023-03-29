@@ -17,5 +17,5 @@ module.exports = {
   userIdFromPhone,
   emailExists,
   encrypt,
-  generateJWT
+  generateJWT,
 };

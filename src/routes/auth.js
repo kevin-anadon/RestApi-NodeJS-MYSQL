@@ -1,14 +1,12 @@
 // url/api/auth POST
-const { Router } = require("express");
-const { check } = require("express-validator");
-const router = Router();
+const { Router } = require("express")
+const { check } = require("express-validator")
+const router = Router()
 
 //Validators
-const { validateFields } = require("../middlewares");
+const { validateFields } = require("../middlewares")
 
-const {
-  login,
-} = require("../controllers/login");
+const { login } = require("../controllers/login")
 
 router.post(
   "/",
@@ -18,6 +16,6 @@ router.post(
     validateFields,
   ],
   login
-);
+)
 
-module.exports = router;
+module.exports = router
